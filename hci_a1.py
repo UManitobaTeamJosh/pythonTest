@@ -15,15 +15,24 @@ def okevent():
 def cancelevent():
     print("cancel")
     sys.exit()
+    
+def toggle():
+    global hidden
+    if hidden == 0:
+        detaillabel.move(7,detailYCord)
+        window.setFixedSize(windowWidth,windowHeightNormal + detaillabel.sizeHint().height() + 5)
+        hidden = 1
+    else:
+        detaillabel.move(offScreen,offScreen)
+        window.setFixedSize(windowWidth,windowHeightNormal)
+        hidden = 0
 
 windowHeightNormal = 115
 windowWidth = 310
 offScreen = -9999999
 buttonYCord = 80
 gap = 5
-detailYCord = buttonYCord + detailbutton.sizeHint().height() + gap
-okXCord = detailbutton.sizeHint().width() + gap*4
-cancelXCord = okXCord + gap + okbutton.sizeHint().width()
+hidden = 0
     
 window = QWidget()
 window.setWindowTitle("Properties Window")
@@ -45,17 +54,8 @@ detaillabel.move(0,offScreen)
 
 # Create detail button
 detailbutton = QPushButton("D&etails",window)
-hidden = 0
-def toggle():
-    global hidden
-    if hidden == 0:
-        detaillabel.move(7,detailYCord)
-        window.setFixedSize(windowWidth,windowHeightNormal + detaillabel.sizeHint().height() + 5)
-        hidden = 1
-    else:
-        detaillabel.move(offScreen,offScreen)
-        window.setFixedSize(windowWidth,windowHeightNormal)
-        hidden = 0
+detailYCord = buttonYCord + detailbutton.sizeHint().height() + gap
+
 
 # Create ok and cancel buttons
 okbutton = QPushButton("Ok",window)
@@ -64,6 +64,9 @@ cancelbutton = QPushButton("Cancel",window)
 okbutton.clicked.connect(okevent)
 cancelbutton.clicked.connect(cancelevent)
 detailbutton.clicked.connect(toggle)
+
+okXCord = detailbutton.sizeHint().width() + gap*4
+cancelXCord = okXCord + gap + okbutton.sizeHint().width()
 
 # Place buttons
 detailbutton.move(5,buttonYCord)
