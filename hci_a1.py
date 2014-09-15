@@ -1,6 +1,6 @@
 # COMP 3020 Assignment 1, Question II (b)
 # Joshua Chan 7722727
-# Josh Lemer
+# Josh Lemer 7634755
 
 import sys
 from PyQt4.QtGui import *
